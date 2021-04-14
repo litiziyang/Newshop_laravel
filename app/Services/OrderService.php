@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Exceptions\TestException;
+use App\Jobs\CloseOrder;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\ProductSku;
@@ -49,9 +50,11 @@ class OrderService
                 return $order;
 
             }
-
-
         );
+        //众筹时间计算
+        $crowFundingTime = $productSku->product->crowdfunding->end_at - time();
+        //剩余秒数与默认订单关闭时间取较小值作为订单关闭时间
+        dispatch(new CloseOrder($order, min(config('app.order_ttl', 18000), $crowFundingTime)));
 
         return $order;
     }

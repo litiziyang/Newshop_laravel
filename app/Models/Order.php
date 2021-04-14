@@ -8,25 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\Order
  *
- * @property int $id ID
- * @property string $no 订单流水号
- * @property int $user_id 下单用户ID
- * @property mixed $address JSON格式的收货地址
- * @property string $total_amount 订单总金额
- * @property string|null $remark 订单备注
- * @property string|null $paid_at 支付时间
- * @property string|null $payment_method 支付方式
- * @property string|null $payment_no 支付平台订单号
- * @property string $refund_status 退款状态
- * @property string|null $refund_no 退款单号
- * @property int $closed 订单是否已关闭
- * @property int $reviewed 订单是否已评价
- * @property string $ship_status 物流状态
- * @property string|null $ship_data 物流数据
- * @property string|null $extra 其他额外的数据
+ * @property int                             $id             ID
+ * @property string                          $no             订单流水号
+ * @property int                             $user_id        下单用户ID
+ * @property mixed                           $address        JSON格式的收货地址
+ * @property string                          $total_amount   订单总金额
+ * @property string|null                     $remark         订单备注
+ * @property string|null                     $paid_at        支付时间
+ * @property string|null                     $payment_method 支付方式
+ * @property string|null                     $payment_no     支付平台订单号
+ * @property string                          $refund_status  退款状态
+ * @property string|null                     $refund_no      退款单号
+ * @property int                             $closed         订单是否已关闭
+ * @property int                             $reviewed       订单是否已评价
+ * @property string                          $ship_status    物流状态
+ * @property string|null                     $ship_data      物流数据
+ * @property string|null                     $extra          其他额外的数据
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User $user
+ * @property-read \App\Models\User           $user
  * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order query()
@@ -134,7 +134,8 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    public function product(){
+    public function product()
+    {
 
     }
 

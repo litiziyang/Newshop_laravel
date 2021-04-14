@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\CrowdfundingProduct
  *
- * @property int    $id            ID
- * @property int    $product_id    商品ID
- * @property string $target_amount 众筹目标金额
- * @property string $total_amount  当前已筹金额
- * @property int    $user_count    当前参与众筹用户数
- * @property string $end_at        众筹结束时间
- * @property string $status        当前众筹的状态
+ * @property int                      $id            ID
+ * @property int                      $product_id    商品ID
+ * @property string                   $target_amount 众筹目标金额
+ * @property string                   $total_amount  当前已筹金额
+ * @property int                      $user_count    当前参与众筹用户数
+ * @property string                   $end_at        众筹结束时间
+ * @property string                   $status        当前众筹的状态
  * @method static \Illuminate\Database\Eloquent\Builder|CrowdfundingProduct newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CrowdfundingProduct newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|CrowdfundingProduct query()
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CrowdfundingProduct whereTotalAmount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CrowdfundingProduct whereUserCount($value)
  * @mixin \Eloquent
- * @property-read mixed $percent
+ * @property-read mixed               $percent
  * @property-read \App\Models\Product $product
  */
 class CrowdfundingProduct extends Model
@@ -47,6 +47,22 @@ class CrowdfundingProduct extends Model
     ];
 
     /**
+     * 应该转换为日期格式的属性
+     *
+     * end_at 会自动转为 Carbon 类型
+     * @var array
+     */
+    protected $dates = ['end_at'];
+
+    /**
+     * 指示是否自动维护时间戳
+     *
+     * 不需要 created_at 和 updated_at 字段
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * 获取商品
      *
      */
@@ -57,7 +73,7 @@ class CrowdfundingProduct extends Model
 
     public function getPercentAttribute()
     {
-       $value= $this->attributes['total_amount']/$this->attributes['target_amount'];
+        $value = $this->attributes['total_amount'] / $this->attributes['target_amount'];
     }
 
 }
